@@ -11,15 +11,14 @@
  * Created on June 30, 2016, 11:34 PM
  */
 
+/* TO DO 11.07.2016:
+ *  */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #define MAXSTRLEN 200
-
-/*
- * struct array malloc
- */
 
 struct medicine {
     char name[32];
@@ -31,16 +30,16 @@ struct medicine {
 struct medicine temp_med;
 
 int main(int argc, char** argv) {
-    int meds_num;   
+    int meds_count;   
     
-    int readln(char s[]);
-    void init_temp_med();
-    void read_meds_data();
+    int readln(char s[]); // why the fuck I need you stupid function
+    void init_temp_med(); // what this init do?
+    void read_meds_data(); // what do you mean "reading them"?
     
     printf("WELCOME TO YPP(Your Pills Program\n\n");
     printf("How many medicines you use?\n");
-    scanf("%i", &meds_num); // create an array of struct for each medicine
-    struct medicine database[meds_num];
+    scanf("%i", &meds_count); // create an array of struct for each medicine
+    struct medicine meds_database[meds_count]; //create a struct array to store meds
     
     read_meds_data();  
    
@@ -66,7 +65,7 @@ int readln(char s[]) {
     s[i] = '\0';
     return i;
 }
-
+// this gives initial values to begin with
 void init_temp_med() {
     strcpy(temp_med.name, "");
     temp_med.mg = 0;
@@ -79,13 +78,13 @@ void read_meds_data() {
     int mg;
     char dosage[MAXSTRLEN];
     char producer[MAXSTRLEN];
-    int slen = 0;
+    int slen = 0; //wtf?
     
     init_temp_med();
     
     while (slen == 0) {
         printf("\nEnter medicine name: ");
-        slen = readln(medicine_name);
+        slen = readln(medicine_name); // what is slen for?
     }
     
     slen = 0;

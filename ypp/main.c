@@ -17,6 +17,7 @@
  * TO DO 12.07.2016:
  * What exactly does readln function and how does it do it? -replaced with gets()
  * When user enters that he/she uses more than one medicine keep asking until 4 medicines are entered
+ * temp_med should go into an array
  *  */
 
 #include <stdio.h>

@@ -12,6 +12,11 @@
  */
 
 /* TO DO 11.07.2016:
+ * forgotten to write what I did
+ * 
+ * TO DO 12.07.2016:
+ * What exactly does readln function and how does it do it? -replaced with gets()
+ * When user enters that he/she uses more than one medicine keep asking until 4 medicines are entered
  *  */
 
 #include <stdio.h>
@@ -30,14 +35,13 @@ struct medicine {
 struct medicine temp_med;
 
 int main(int argc, char** argv) {
-    int meds_count;   
-    
-    int readln(char s[]); // why the fuck I need you stupid function
-    void init_temp_med(); // what this init do?
+    int meds_count; 
+    //int readln(char s[]); // why the fuck I need you stupid function.
+    void init_temp_med(); // 
     void read_meds_data(); // what do you mean "reading them"?
     
-    printf("WELCOME TO YPP(Your Pills Program\n\n");
-    printf("How many medicines you use?\n");
+    printf("WELCOME TO YPP(Your Pills Program)\n\n");
+    printf("How many medicines you use? ");
     scanf("%i", &meds_count); // create an array of struct for each medicine
     struct medicine meds_database[meds_count]; //create a struct array to store meds
     
@@ -47,24 +51,6 @@ int main(int argc, char** argv) {
     return (EXIT_SUCCESS);
 }
 
-int readln(char s[]) {
-    char ch;
-    int i;
-    int chars_remain;
-    i = 0;
-    chars_remain = 1;
-    while (chars_remain) {
-        ch = getchar();
-        if ((ch == '\n') || (ch == EOF)) {
-            chars_remain = 0;
-        } else if (i < MAXSTRLEN - 1) {
-            s[i] = ch;
-            i++;
-        }
-    }
-    s[i] = '\0';
-    return i;
-}
 // this gives initial values to begin with
 void init_temp_med() {
     strcpy(temp_med.name, "");
@@ -78,32 +64,39 @@ void read_meds_data() {
     int mg;
     char dosage[MAXSTRLEN];
     char producer[MAXSTRLEN];
-    int slen = 0; //wtf?
+    int slen = 0; //what is mean "slen", string length? What exactly is the purpose of this variable?
     
-    init_temp_med();
+    init_temp_med(); //give initial values because if nothing is here the garbage values will
     
     while (slen == 0) {
         printf("\nEnter medicine name: ");
-        slen = readln(medicine_name); // what is slen for?
+        //slen = readln(medicine_name); // what is slen for?
+        getchar(); // flush
+        slen = gets(medicine_name); // what does gets() return - This function returns str on success, and NULL on error or when end of file occurs, while no characters have been read.
     }
     
     slen = 0;
     while (slen == 0) {
         printf("\nEnter mg: ");
-        slen = readln(mg); // convert it to number using atoi() later?
-        //scanf("%i", &mg);
+        //slen = readln(mg); // convert it to number using atoi() later?
+        //slen = (int)gets(mg);
+        scanf("%i", &mg);
+        slen = mg;
+        getchar(); // flush
     }
     
     slen = 0;
     while (slen == 0) {
         printf("\nEnter dosage: ");
-        slen = readln(dosage);
+        //slen = readln(dosage);
+        slen = gets(dosage);
     }
     
     slen = 0;
     while (slen == 0) {
         printf("\nEnter producer name: ");
-        slen = readln(producer);
+        //slen = readln(producer);
+        slen = gets(producer);
     }     
     
     strcpy(temp_med.name, medicine_name);

@@ -32,7 +32,7 @@ struct medicine {
     char producer[32];
 };
 
-struct medicine temp_med;
+struct medicine temp_med; // I think that this should be a struct array..not sure
 
 int main(int argc, char** argv) {
     int meds_count; 

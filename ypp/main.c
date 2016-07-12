@@ -35,23 +35,6 @@ struct medicine {
 
 struct medicine temp_med; // I think that this should be a struct array..not sure
 
-int main(int argc, char** argv) {
-    int meds_count; 
-    //int readln(char s[]); // why the fuck I need you stupid function.
-    void init_temp_med(); // 
-    void read_meds_data(); // what do you mean "reading them"?
-    
-    printf("WELCOME TO YPP(Your Pills Program)\n\n");
-    printf("How many medicines you use? ");
-    scanf("%i", &meds_count); // create an array of struct for each medicine
-    struct medicine meds_database[meds_count]; //create a struct array to store meds
-    
-    read_meds_data();  
-   
-
-    return (EXIT_SUCCESS);
-}
-
 // this gives initial values to begin with
 void init_temp_med() {
     strcpy(temp_med.name, "");
@@ -106,6 +89,22 @@ void read_meds_data() {
     strcpy(temp_med.producer, producer);    
     
 }
+
+int main(int argc, char** argv) {
+    int meds_count; 
+    
+    printf("WELCOME TO YPP(Your Pills Program)\n\n");
+    printf("How many medicines you use? ");
+    scanf("%i", &meds_count); // create an array of struct for each medicine
+    struct medicine meds_database[meds_count]; //create a struct array to store meds
+    
+    read_meds_data();  
+   
+
+    return (EXIT_SUCCESS);
+}
+
+
 
 
 

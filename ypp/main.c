@@ -24,7 +24,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 
 
 //#define filename "medicine_database.bin"
@@ -107,22 +106,17 @@ void add_medicine(char *filename) {
 }
 
 int main(int argc, char** argv) {
-    bool condition;
+    //bool condition;
     int meds_count, keep_going = 1;
     char choice;
     
     printf("WELCOME TO YPP(Your Pills Program)\n\n");
     printf("Please select an option:\n");
-    //scanf("%c", &choice);
-    while (choice = getchar() && condition == true) {
-        if (choice == '\n') {
-            condition = false;
-        }
-    }
-    
-    //choice = getc(stdin);
-    //choice = fgetc(stdin);
-    
+    printf("a - Add a medicine to the database\n");
+    printf("d - Display list of stored medicines\n");
+    printf("m - Modify medicine\n");
+    printf("q - End program");
+    choice = getchar();    
     
     while (keep_going) {
         switch(choice) {
@@ -131,7 +125,7 @@ int main(int argc, char** argv) {
             add_medicine(filename1);
             break;
         case 'd':
-            printf("Display medicines\n");
+            printf("Display list of stored medicines\n");
             // fill what's necessary here
             break;
         case 'm':

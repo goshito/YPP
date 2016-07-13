@@ -18,6 +18,7 @@
  * What exactly does readln function and how does it do it? -replaced with gets()
  * When user enters that he/she uses more than one medicine keep asking until 4 medicines are entered
  * temp_med should go into an array - I already have an array(where to put it?
+ * 
  *  */
 
 #include <stdio.h>
@@ -28,6 +29,7 @@
 //#define filename "medicine_database.bin"
 #define backupfilename "medicine_database.bak"
 #define MAXSTRLEN 200
+#define filename1 "medicine_database1.bin" 
 
 struct medicine {
     char name[32];
@@ -94,9 +96,9 @@ void add_medicine(char *filename) {
     FILE *f;
     
     read_meds_data();
-    f = fopen(filename, "rb");
+    f = fopen(filename1, "rb");
     if (f == 0) {
-        printf("Cannot write to file: %s\n", filename);
+        printf("Cannot write to file: %s\n", filename1);
     } else {
         fwrite(&temp_med, sizeof(temp_med), 1, f);
         fclose(f);
@@ -114,7 +116,7 @@ int main(int argc, char** argv) {
         switch(choice) {
         case 'a': // add a medicine in database
             printf("Add a medicine to the database\n");
-            add_medicine("medicine_database.bin");
+            add_medicine(filename1);
             break;
         case 'd':
             printf("Display medicines\n");
@@ -124,7 +126,7 @@ int main(int argc, char** argv) {
             printf("Modify medicine\n");
             // fill what's necessary here
             break;
-        case 'a':
+        case 'q':
             printf("Ending...\n");
             keep_going = 0;
             break;
@@ -134,13 +136,13 @@ int main(int argc, char** argv) {
         }
     }
     
-    
+    /*
     printf("How many medicines you use? "); //this must be beneath case 'a'
     scanf("%i", &meds_count); // create an array of struct for each medicine
     struct medicine meds_database[meds_count]; //create a struct array to store meds
     
     read_meds_data();  
-   
+   */
 
     return (EXIT_SUCCESS);
 }

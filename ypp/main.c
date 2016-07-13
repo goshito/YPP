@@ -106,7 +106,6 @@ void add_medicine(char *filename) {
 }
 
 int main(int argc, char** argv) {
-    //bool condition;
     int meds_count, keep_going = 1;
     char choice;
     
@@ -115,10 +114,11 @@ int main(int argc, char** argv) {
     printf("a - Add a medicine to the database\n");
     printf("d - Display list of stored medicines\n");
     printf("m - Modify medicine\n");
-    printf("q - End program\n");
-    choice = getchar();    
+    printf("q - End program\n\n");
+    //choice = getchar();    
     
     while (keep_going) {
+        choice = getchar();
         switch(choice) {
         case 'a': // add a medicine in database
             printf("Add a medicine to the database\n");

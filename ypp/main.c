@@ -115,7 +115,7 @@ int main(int argc, char** argv) {
     printf("a - Add a medicine to the database\n");
     printf("d - Display list of stored medicines\n");
     printf("m - Modify medicine\n");
-    printf("q - End program");
+    printf("q - End program\n");
     choice = getchar();    
     
     while (keep_going) {

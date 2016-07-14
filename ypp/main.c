@@ -31,7 +31,9 @@
 
 #define backupfilename "medicine_database.bak"
 #define MAXSTRLEN 200
-#define filename "medicine_database1.bin"
+//#define filename "medicine_database1.bin"
+char filename[] = "medicine_database1.bin";
+
 struct medicine {
     char name[32];
     int mg;
@@ -115,6 +117,21 @@ void display_main_menu(void) {
     printf("q - End program\n\n");
 }    
 
+int number_of_stored_medicines(char *filename) {
+    FILE *f;
+    int end_position, number_of_stored_meds = 0;
+    
+    f = fopen(filename, "rb");
+    if (f == 0)
+        printf("Cannot open file: %s", filename);
+    else {
+        fseek(f, 0, SEEK_END);
+        end_position = ftell(f);
+        number_of_stored_meds = end_position / sizeof(temp_med);
+        fclose(f);
+    }
+    return number_of_stored_meds;
+}
 
 int main(int argc, char** argv) {
     int meds_count, keep_going = 1;
@@ -131,7 +148,7 @@ int main(int argc, char** argv) {
             break;
         case 'd':
             printf("Display list of stored medicines\n");
-            // fill what's necessary here
+            // determine the number of stored meds
             break;
         case 'm':
             printf("Modify medicine\n");

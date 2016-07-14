@@ -22,7 +22,8 @@
  * TO DO 14.07.2016:
  * implement add medicine option - done
  * system("clear"); might be good at some points - implemented
- * add display meds database 'd'
+ * add display meds database 'd' - 1. determine number of meds in the binary file
+ * display number of stored meds problem, spils memory - fixed with getchar();
  *  */
 
 #include <stdio.h>
@@ -147,8 +148,10 @@ int main(int argc, char** argv) {
             add_medicine(filename);
             break;
         case 'd':
+            system("clear");
             printf("Display list of stored medicines\n");
-            // determine the number of stored meds
+            getchar(); //flush
+            printf("\nnumber_of_stored_meds = %d\n", number_of_stored_medicines(filename));
             break;
         case 'm':
             printf("Modify medicine\n");

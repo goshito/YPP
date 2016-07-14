@@ -133,8 +133,8 @@ int number_of_stored_medicines(char *filename) {
         end_position = ftell(f);
         number_of_stored_meds = end_position / sizeof(temp_med);
         fclose(f);
-    }
-    return number_of_stored_meds;
+        return number_of_stored_meds;
+    }    
 }
 
 

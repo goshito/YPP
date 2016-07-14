@@ -21,7 +21,8 @@
  * 
  * TO DO 14.07.2016:
  * implement add medicine option - done
- * system("clear") might be good at some points
+ * system("clear"); might be good at some points - implemented
+ * add display meds database 'd'
  *  */
 
 #include <stdio.h>
@@ -95,13 +96,14 @@ void add_medicine(char *filename1) {
     FILE *f;
     
     read_meds_data();
-    f = fopen(filename, "a");
+    f = fopen(filename, "ab");
     if (f == 0) {
         printf("Cannot write to file: %s\n", filename);
     } else {
         fwrite(&temp_med, sizeof(temp_med), 1, f);
         fclose(f);
-        printf("\nMedicine added.\n");
+        system("clear");
+        printf("Medicine added. \nReturning to main menu.\n\n");
     }
 }
 
@@ -123,6 +125,7 @@ int main(int argc, char** argv) {
         display_main_menu();
         switch(getchar()) {
         case 'a': // add a medicine in database
+            system("clear");
             printf("Add a medicine to the database\n");
             add_medicine(filename);
             break;

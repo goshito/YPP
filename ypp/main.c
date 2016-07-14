@@ -19,6 +19,8 @@
  * When user enters that he/she uses more than one medicine keep asking until 4 medicines are entered
  * temp_med should go into an array - I already have an array(where to put it?
  * 
+ * TO DO 14.07.2016:
+ * implement add medicine option
  *  */
 
 #include <stdio.h>
@@ -29,8 +31,7 @@
 //#define filename "medicine_database.bin"
 #define backupfilename "medicine_database.bak"
 #define MAXSTRLEN 200
-#define filename1 "medicine_database1.bin" 
-
+#define filename "medicine_database1.bin"
 struct medicine {
     char name[32];
     int mg;
@@ -81,7 +82,6 @@ void read_meds_data() { // what should happend after that? what to do with the t
     slen = 0;
     while (slen == 0) {
         printf("\nEnter producer name: ");
-        //slen = readln(producer);
         slen = gets(producer);
     }     
     
@@ -92,13 +92,13 @@ void read_meds_data() { // what should happend after that? what to do with the t
     
 }
 
-void add_medicine(char *filename) {
+void add_medicine(char *filename1) {
     FILE *f;
     
     read_meds_data();
-    f = fopen(filename1, "rb");
+    f = fopen(filename, "a");
     if (f == 0) {
-        printf("Cannot write to file: %s\n", filename1);
+        printf("Cannot write to file: %s\n", filename);
     } else {
         fwrite(&temp_med, sizeof(temp_med), 1, f);
         fclose(f);
@@ -107,7 +107,6 @@ void add_medicine(char *filename) {
 
 int main(int argc, char** argv) {
     int meds_count, keep_going = 1;
-    char choice;
     
     printf("WELCOME TO YPP(Your Pills Program)\n\n");
     printf("Please select an option:\n");
@@ -118,11 +117,10 @@ int main(int argc, char** argv) {
     //choice = getchar();    
     
     while (keep_going) {
-        choice = getchar();
-        switch(choice) {
+        switch(getchar()) {
         case 'a': // add a medicine in database
             printf("Add a medicine to the database\n");
-            add_medicine(filename1);
+            add_medicine(filename);
             break;
         case 'd':
             printf("Display list of stored medicines\n");

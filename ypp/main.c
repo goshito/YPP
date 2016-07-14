@@ -119,12 +119,7 @@ void display_main_menu(void) {
 int main(int argc, char** argv) {
     int meds_count, keep_going = 1;
     
-    printf("WELCOME TO YPP(Your Pills Program)\n\n");
-    printf("Please select an option:\n");
-    printf("a - Add a medicine to the database\n");
-    printf("d - Display list of stored medicines\n");
-    printf("m - Modify medicine\n");
-    printf("q - End program\n\n");
+    display_main_menu();
     
     while (keep_going) {
         switch(getchar()) {

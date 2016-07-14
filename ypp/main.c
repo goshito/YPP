@@ -20,12 +20,13 @@
  * temp_med should go into an array - I already have an array(where to put it?
  * 
  * TO DO 14.07.2016:
- * implement add medicine option
+ * implement add medicine option - done
  *  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 
 //#define filename "medicine_database.bin"
@@ -105,6 +106,16 @@ void add_medicine(char *filename1) {
     }
 }
 
+void display_main_menu(void) {
+    printf("WELCOME TO YPP(Your Pills Program)\n\n");
+    printf("Please select an option:\n");
+    printf("a - Add a medicine to the database\n");
+    printf("d - Display list of stored medicines\n");
+    printf("m - Modify medicine\n");
+    printf("q - End program\n\n");
+}    
+
+
 int main(int argc, char** argv) {
     int meds_count, keep_going = 1;
     
@@ -114,13 +125,13 @@ int main(int argc, char** argv) {
     printf("d - Display list of stored medicines\n");
     printf("m - Modify medicine\n");
     printf("q - End program\n\n");
-    //choice = getchar();    
     
     while (keep_going) {
         switch(getchar()) {
         case 'a': // add a medicine in database
             printf("Add a medicine to the database\n");
             add_medicine(filename);
+            display_main_menu();
             break;
         case 'd':
             printf("Display list of stored medicines\n");
@@ -139,14 +150,6 @@ int main(int argc, char** argv) {
             break;
         }
     }
-    
-    /*
-    printf("How many medicines you use? "); //this must be beneath case 'a'
-    scanf("%i", &meds_count); // create an array of struct for each medicine
-    struct medicine meds_database[meds_count]; //create a struct array to store meds
-    
-    read_meds_data();  
-   */
 
     return (EXIT_SUCCESS);
 }

@@ -24,6 +24,7 @@
  * system("clear"); might be good at some points - implemented
  * add display meds database 'd' - 1. determine number of meds in the binary file
  * display number of stored meds problem, spils memory - fixed with getchar();
+ * must have a struct array, store the data in a struct array
  *  */
 
 #include <stdio.h>
@@ -123,8 +124,10 @@ int number_of_stored_medicines(char *filename) {
     int end_position, number_of_stored_meds = 0;
     
     f = fopen(filename, "rb");
-    if (f == 0)
+    if (f == 0) {
         printf("Cannot open file: %s", filename);
+        return 0;
+    }
     else {
         fseek(f, 0, SEEK_END);
         end_position = ftell(f);
@@ -133,6 +136,8 @@ int number_of_stored_medicines(char *filename) {
     }
     return number_of_stored_meds;
 }
+
+
 
 int main(int argc, char** argv) {
     int meds_count, keep_going = 1;

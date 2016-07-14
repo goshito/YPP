@@ -125,7 +125,7 @@ int number_of_stored_medicines(char *filename) {
     
     f = fopen(filename, "rb");
     if (f == 0) {
-        printf("Cannot open file: %s", filename);
+        //printf("Cannot open file: %s", filename);
         return 0;
     }
     else {
@@ -156,7 +156,10 @@ int main(int argc, char** argv) {
             system("clear");
             printf("Display list of stored medicines\n");
             getchar(); //flush
-            printf("\nnumber_of_stored_meds = %d\n", number_of_stored_medicines(filename));
+            meds_count = number_of_stored_medicines(filename);
+            //printf("\nnumber_of_stored_meds = %d\n", number_of_stored_medicines(filename));
+            if (meds_count == 0)
+                printf("Cannot open file: %s\n", filename);
             break;
         case 'm':
             printf("Modify medicine\n");

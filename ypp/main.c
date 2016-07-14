@@ -21,15 +21,13 @@
  * 
  * TO DO 14.07.2016:
  * implement add medicine option - done
+ * system("clear") might be good at some points
  *  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 
-
-//#define filename "medicine_database.bin"
 #define backupfilename "medicine_database.bak"
 #define MAXSTRLEN 200
 #define filename "medicine_database1.bin"
@@ -103,11 +101,11 @@ void add_medicine(char *filename1) {
     } else {
         fwrite(&temp_med, sizeof(temp_med), 1, f);
         fclose(f);
+        printf("\nMedicine added.\n");
     }
 }
 
-void display_main_menu(void) {
-    printf("WELCOME TO YPP(Your Pills Program)\n\n");
+void display_main_menu(void) {    
     printf("Please select an option:\n");
     printf("a - Add a medicine to the database\n");
     printf("d - Display list of stored medicines\n");
@@ -119,14 +117,14 @@ void display_main_menu(void) {
 int main(int argc, char** argv) {
     int meds_count, keep_going = 1;
     
-    display_main_menu();
+    printf("WELCOME TO YPP(Your Pills Program)\n\n");
     
     while (keep_going) {
+        display_main_menu();
         switch(getchar()) {
         case 'a': // add a medicine in database
             printf("Add a medicine to the database\n");
             add_medicine(filename);
-            display_main_menu();
             break;
         case 'd':
             printf("Display list of stored medicines\n");

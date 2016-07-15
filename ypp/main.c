@@ -40,6 +40,7 @@
 #define MAXSTRLEN 200
 //#define filename "medicine_database1.bin"
 char filename[] = "medicine_database1.bin";
+int medicines_array_len;
 
 struct medicine {
     char name[32];
@@ -48,7 +49,7 @@ struct medicine {
     char producer[32];
 };
 
-struct medicine temp_med; // I think that this should be a struct array..not sure
+struct medicine temp_med, *stored_medicines; // I think that this should be a struct array..not sure
 
 // this gives initial values to begin with
 void init_temp_med() {
@@ -142,15 +143,24 @@ int number_of_stored_medicines(char *filename) {
     }    
 }
 
-int load_stored_medicines(char filename) {
+int load_stored_medicines(char *filename) {
     FILE *f;
     int number_of_medicines, number_of_read_meds = 0;
     
     number_of_medicines = number_of_stored_medicines(filename);
     f = fopen(filename, "rb");
     if (f == 0) {
-        
+        printf("Cannot read file: %s\n", filename);
+    } else {
+        stored_medicines = (struct * medicine) malloc(sizeof(struct medicine) * number_of_medicines);
+        number_of_read_meds = fread(stored_medicines, sizeof(stored_medicines), number_of_medicines, f);
+        if (number_of_read_meds != number_of_medicines) {
+            printf("Error: %d medicines in file but %d were read into memory", number_of_medicines, number_of_read_meds);
+        }
+        fclose(f);
     }
+    medicines_array_len = number_of_read_meds; //
+    return number_of_read_meds;
 }
 
 

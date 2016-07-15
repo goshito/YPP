@@ -27,6 +27,8 @@
  * must have a struct array, store the data in a struct array!!!
  * 
  * TO DO 15.07.2016:
+ * create a struct array in which the entries to be read
+ * create 
  * 
  *  */
 
@@ -140,6 +142,16 @@ int number_of_stored_medicines(char *filename) {
     }    
 }
 
+int load_stored_medicines(char filename) {
+    FILE *f;
+    int number_of_medicines, number_of_read_meds = 0;
+    
+    number_of_medicines = number_of_stored_medicines(filename);
+    f = fopen(filename, "rb");
+    if (f == 0) {
+        
+    }
+}
 
 
 int main(int argc, char** argv) {

@@ -164,7 +164,7 @@ int load_stored_medicines(char *filename) {
 }
 
 void display_medicines(char * filename) {
-    int i, numrecs;
+    int i, number_of_medicines;
     struct medicine this_medicine;
     
     number_of_medicines = load_stored_medicines(filename);
@@ -197,7 +197,7 @@ int main(int argc, char** argv) {
                 system("clear");
                 printf("Cannot open file: %s\n", filename);
             } else {
-                
+                display_medicines(filename);
             }
             break;
         case 'm':

@@ -24,7 +24,10 @@
  * system("clear"); might be good at some points - implemented
  * add display meds database 'd' - 1. determine number of meds in the binary file
  * display number of stored meds problem, spils memory - fixed with getchar();
- * must have a struct array, store the data in a struct array
+ * must have a struct array, store the data in a struct array!!!
+ * 
+ * TO DO 15.07.2016:
+ * 
  *  */
 
 #include <stdio.h>
@@ -112,7 +115,7 @@ void add_medicine(char *filename1) {
 }
 
 void display_main_menu(void) {    
-    printf("Please select an option:\n");
+    printf("\nPlease select an option:\n");
     printf("a - Add a medicine to the database\n");
     printf("d - Display list of stored medicines\n");
     printf("m - Modify medicine\n");
@@ -157,9 +160,10 @@ int main(int argc, char** argv) {
             printf("Display list of stored medicines\n");
             getchar(); //flush
             meds_count = number_of_stored_medicines(filename);
-            //printf("\nnumber_of_stored_meds = %d\n", number_of_stored_medicines(filename));
-            if (meds_count == 0)
+            if (meds_count == 0) {
+                system("clear");
                 printf("Cannot open file: %s\n", filename);
+            }
             break;
         case 'm':
             printf("Modify medicine\n");

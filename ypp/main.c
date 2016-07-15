@@ -152,7 +152,7 @@ int load_stored_medicines(char *filename) {
     if (f == 0) {
         printf("Cannot read file: %s\n", filename);
     } else {
-        stored_medicines = (struct * medicine) malloc(sizeof(struct medicine) * number_of_medicines);
+        stored_medicines = (struct medicine *) malloc(sizeof(struct medicine) * number_of_medicines);
         number_of_read_meds = fread(stored_medicines, sizeof(stored_medicines), number_of_medicines, f);
         if (number_of_read_meds != number_of_medicines) {
             printf("Error: %d medicines in file but %d were read into memory", number_of_medicines, number_of_read_meds);
@@ -161,6 +161,17 @@ int load_stored_medicines(char *filename) {
     }
     medicines_array_len = number_of_read_meds; //
     return number_of_read_meds;
+}
+
+void display_medicines(char * filename) {
+    int i, numrecs;
+    struct medicine this_medicine;
+    
+    number_of_medicines = load_stored_medicines(filename);
+    for (i = 0; i < number_of_medicines; i++) {
+        this_medicine = stored_medicines[i];
+        printf("%s %d %s %s", this_medicine.name, this_medicine.mg, this_medicine.dosage, this_medicine.producer);
+    }
 }
 
 
@@ -185,6 +196,8 @@ int main(int argc, char** argv) {
             if (meds_count < 0) {
                 system("clear");
                 printf("Cannot open file: %s\n", filename);
+            } else {
+                
             }
             break;
         case 'm':

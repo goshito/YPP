@@ -27,7 +27,7 @@
  * must have a struct array, store the data in a struct array!!!
  * 
  * TO DO 15.07.2016:
- * create a struct array in which the entries to be read
+ * create a struct array in which the entries to be read - I think I did it
  * create 
  * 
  *  */
@@ -170,7 +170,7 @@ void display_medicines(char * filename) {
     number_of_medicines = load_stored_medicines(filename);
     for (i = 0; i < number_of_medicines; i++) {
         this_medicine = stored_medicines[i];
-        printf("%s %d %s %s", this_medicine.name, this_medicine.mg, this_medicine.dosage, this_medicine.producer);
+        printf("Name: %s %dmg\n Scheme: %s\n Producer: %s\n\n", this_medicine.name, this_medicine.mg, this_medicine.dosage, this_medicine.producer);
     }
 }
 

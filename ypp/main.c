@@ -129,7 +129,7 @@ int number_of_stored_medicines(char *filename) {
     f = fopen(filename, "rb");
     if (f == 0) {
         //printf("Cannot open file: %s", filename);
-        return 0;
+        return -1;
     }
     else {
         fseek(f, 0, SEEK_END);
@@ -160,7 +160,7 @@ int main(int argc, char** argv) {
             printf("Display list of stored medicines\n");
             getchar(); //flush
             meds_count = number_of_stored_medicines(filename);
-            if (meds_count == 0) {
+            if (meds_count < 0) {
                 system("clear");
                 printf("Cannot open file: %s\n", filename);
             }

@@ -164,7 +164,7 @@ int load_stored_medicines(char *filename) {
         }
         fclose(f);
     }
-    medicines_array_len = number_of_read_meds; //
+    medicines_array_len = number_of_read_meds; // is this necessary?
     return number_of_read_meds;
 }
 
@@ -181,12 +181,16 @@ void display_medicines(char * filename) {
 
 void change_medicine(char *filename, int medicine_number) {
     FILE *f;
-    struct medicine *medicine;
+    struct medicine *medicine_pointer;
     size_t r;
     
     f = fopen(filename, rb+);
     if (f == 0) {
-        
+        printf("Cannot open file: %s\n", filename);
+    } else {
+        medicine_pointer = (struct medicine *)malloc(sizeof(struct medicine));
+        r = fseek(f, medicine_number * sizeof(struct medicine), SEEK_SET);
+        r = fread(medicine_pointer, sizeof(struct_medicine))
     }
 }
 

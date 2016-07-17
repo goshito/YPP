@@ -30,7 +30,11 @@
  * create a struct array in which the entries to be read - I think I did it create it 
  * 
  * TO DO 16.07.2016:
- * indexing/numeration of stored medicines
+ * indexing/numeration of stored medicines - done
+ * 
+ * TO DO 17.07.2016:
+ * create modify medicine functionality
+ * 
  */
 
 #include <stdio.h>
@@ -175,6 +179,16 @@ void display_medicines(char * filename) {
     }
 }
 
+void change_medicine(char *filename, int medicine_number) {
+    FILE *f;
+    struct medicine *medicine;
+    size_t r;
+    
+    f = fopen(filename, rb+);
+    if (f == 0) {
+        
+    }
+}
 
 int main(int argc, char** argv) {
     int meds_count, keep_going = 1;

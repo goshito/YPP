@@ -35,6 +35,10 @@
  * TO DO 17.07.2016:
  * create modify medicine functionality
  * 
+ * TO DO: 21.07.2016:
+ * Maybe the variables inside the functions should be global
+ * Algorithm to modify medicine
+ * 
  */
 
 #include <stdio.h>
@@ -43,7 +47,7 @@
 
 #define backupfilename "medicine_database.bak"
 #define MAXSTRLEN 200
-//#define filename "medicine_database1.bin"
+//#define filename "medicine_database1.bin" for some reason this doesn't work
 char filename[] = "medicine_database1.bin";
 int medicines_array_len;
 
@@ -182,15 +186,17 @@ void display_medicines(char * filename) {
 void change_medicine(char *filename, int medicine_number) {
     FILE *f;
     struct medicine *medicine_pointer;
-    size_t r;
+    size_t r, number_of_medicines;
     
-    f = fopen(filename, rb+);
+    number_of_medicines = number_of_stored_medicines(filename);
+    
+    f = fopen(filename, "rb+");
     if (f == 0) {
         printf("Cannot open file: %s\n", filename);
     } else {
         medicine_pointer = (struct medicine *)malloc(sizeof(struct medicine));
         r = fseek(f, medicine_number * sizeof(struct medicine), SEEK_SET);
-        r = fread(medicine_pointer, sizeof(struct_medicine))
+        r = fread(medicine_pointer, sizeof(stored_medicines), number_of_medicines, f);
     }
 }
 
@@ -219,8 +225,9 @@ int main(int argc, char** argv) {
             }
             break;
         case 'm':
+            system("clear");
             printf("Modify medicine\n");
-            
+            getchar(); //flush
             break;
         case 'q':
             printf("Ending...\n");

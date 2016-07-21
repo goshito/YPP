@@ -187,15 +187,13 @@ void change_medicine(char *filename, int medicine_number) {
     struct medicine *medicine_pointer; // medicine pointer doesn't point anywhere
     size_t r, number_of_medicines;
     
-    number_of_medicines = number_of_stored_medicines(filename);
-    
     f = fopen(filename, "rb+");
     if (f == 0) {
         printf("Cannot open file: %s\n", filename);
     } else {
         medicine_pointer = (struct medicine *)malloc(sizeof(struct medicine));
         r = fseek(f, medicine_number * sizeof(struct medicine), SEEK_SET);
-        r = fread(medicine_pointer, sizeof(struct medicine), number_of_medicines, f);
+        r = fread(medicine_pointer, sizeof(struct medicine), 1, f);
         read_meds_data();
         strcpy(medicine_pointer->name, temp_med.name);
         medicine_pointer->mg = temp_med.mg;

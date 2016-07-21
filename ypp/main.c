@@ -39,7 +39,7 @@
  * Maybe the variables inside the functions should be global
  * Algorithm to modify medicine
  * I am skipping some input error checking
- * 
+ * transfer functions to a separate file also use a header file to declare them
  */
 
 #include <stdio.h>
@@ -202,7 +202,7 @@ void change_medicine(char *filename, int medicine_number) {
         strcpy(medicine_pointer->dosage, temp_med.dosage);
         strcpy(medicine_pointer->producer, temp_med.producer);
         r = fseek(f, medicine_number * sizeof(temp_med), SEEK_SET);
-        fwrite(medicine_pointer, sizeof(temp_med), 1, f);        
+        r = fwrite(medicine_pointer, sizeof(temp_med), 1, f);        
         fclose(f);
         free(medicine_pointer);
     }

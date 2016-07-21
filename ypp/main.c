@@ -201,7 +201,7 @@ void change_medicine(char *filename, int medicine_number) {
         strcpy(medicine_pointer->producer, temp_med.producer);
         r = fseek(f, medicine_number * sizeof(struct medicine), SEEK_SET); //
         r = fwrite(medicine_pointer, sizeof(struct medicine), 1, f);        
-        //fclose(f);
+        fclose(f);
         free(medicine_pointer);
     }
 }

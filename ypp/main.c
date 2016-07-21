@@ -201,9 +201,9 @@ void change_medicine(char *filename, int medicine_number) {
         medicine_pointer->mg = temp_med.mg;
         strcpy(medicine_pointer->dosage, temp_med.dosage);
         strcpy(medicine_pointer->producer, temp_med.producer);
-        r = fseek(f, medicine_number * sizeof(temp_med), SEEK_SET);
+        r = fseek(f, medicine_number * sizeof(temp_med), SEEK_SET); //
         r = fwrite(medicine_pointer, sizeof(temp_med), 1, f);        
-        fclose(f);
+        //fclose(f);
         free(medicine_pointer);
     }
 }

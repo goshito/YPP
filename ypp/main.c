@@ -38,6 +38,7 @@
  * TO DO: 21.07.2016:
  * Maybe the variables inside the functions should be global
  * Algorithm to modify medicine
+ * I am skipping some input error checking
  * 
  */
 
@@ -48,16 +49,14 @@
 #define backupfilename "medicine_database.bak"
 #define MAXSTRLEN 200
 //#define filename "medicine_database1.bin" for some reason this doesn't work
-char filename[] = "medicine_database1.bin";
-int medicines_array_len;
-
 struct medicine {
     char name[32];
     int mg;
     char dosage[12];
     char producer[32];
 };
-
+char filename[] = "medicine_database1.bin";
+int medicines_array_len;
 struct medicine temp_med, *stored_medicines; // I think that this should be a struct array..not sure
 
 // this gives initial values to begin with
@@ -197,7 +196,24 @@ void change_medicine(char *filename, int medicine_number) {
         medicine_pointer = (struct medicine *)malloc(sizeof(struct medicine));
         r = fseek(f, medicine_number * sizeof(struct medicine), SEEK_SET);
         r = fread(medicine_pointer, sizeof(stored_medicines), number_of_medicines, f);
+        read_meds_data();
+        strcpy(medicine_pointer->name, temp_med.name);
+        medicine_pointer->mg = temp_med.mg;
+        strcpy(medicine_pointer->dosage, temp_med.dosage);
+        strcpy(medicine_pointer->producer, temp_med.producer);
+        r = fseek(f, medicine_number * sizeof(temp_med), SEEK_SET);
+        fwrite(medicine_pointer, sizeof(temp_med), 1, f);
+        fclose(f);
     }
+}
+
+void modify_stored_medicine() {
+    int medicine_number;
+    
+    printf("Enter number of stored medicine to modify: ");
+    scanf("%i", &medicine_number);
+    
+    change_medicine(filename, medicine_number);
 }
 
 int main(int argc, char** argv) {
@@ -226,8 +242,10 @@ int main(int argc, char** argv) {
             break;
         case 'm':
             system("clear");
-            printf("Modify medicine\n");
+            printf("MODIFY MEDICINE\n\n");
             getchar(); //flush
+            //printf("Enter the number of a stored medicine that you wish to modify: ");
+            modify_stored_medicine(filename);
             break;
         case 'q':
             printf("Ending...\n");

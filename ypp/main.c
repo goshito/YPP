@@ -193,8 +193,8 @@ void change_medicine(char *filename, int medicine_number) {
     if (f == 0) {
         printf("Cannot open file: %s\n", filename);
     } else {
-        medicine_pointer = (struct medicine *)malloc(sizeof(struct medicine));
-        r = fseek(f, medicine_number * sizeof(struct medicine), SEEK_SET);
+        medicine_pointer = (struct medicine *)malloc(sizeof(temp_med));
+        r = fseek(f, medicine_number * sizeof(temp_med), SEEK_SET);
         r = fread(medicine_pointer, sizeof(stored_medicines), number_of_medicines, f);
         read_meds_data();
         strcpy(medicine_pointer->name, temp_med.name);
@@ -202,8 +202,9 @@ void change_medicine(char *filename, int medicine_number) {
         strcpy(medicine_pointer->dosage, temp_med.dosage);
         strcpy(medicine_pointer->producer, temp_med.producer);
         r = fseek(f, medicine_number * sizeof(temp_med), SEEK_SET);
-        fwrite(medicine_pointer, sizeof(temp_med), 1, f);
+        fwrite(medicine_pointer, sizeof(temp_med), 1, f);        
         fclose(f);
+        free(medicine_pointer);
     }
 }
 

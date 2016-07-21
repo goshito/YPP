@@ -178,13 +178,13 @@ void display_medicines(char * filename) {
     number_of_medicines = load_stored_medicines(filename);
     for (i = 0; i < number_of_medicines; i++) {
         this_medicine = stored_medicines[i];
-        printf("Medicine #%d:\nName: %s %dmg\nScheme: %s\nProducer: %s\n\n", i+1, this_medicine.name, this_medicine.mg, this_medicine.dosage, this_medicine.producer);
+        printf("Medicine #%d:\nName: %s %dmg\nScheme: %s\nProducer: %s\n\n", i, this_medicine.name, this_medicine.mg, this_medicine.dosage, this_medicine.producer);
     }
 }
 
 void change_medicine(char *filename, int medicine_number) {
     FILE *f;
-    struct medicine *medicine_pointer;
+    struct medicine *medicine_pointer; // medicine pointer doesn't point anywhere
     size_t r, number_of_medicines;
     
     number_of_medicines = number_of_stored_medicines(filename);
@@ -193,16 +193,16 @@ void change_medicine(char *filename, int medicine_number) {
     if (f == 0) {
         printf("Cannot open file: %s\n", filename);
     } else {
-        medicine_pointer = (struct medicine *)malloc(sizeof(temp_med));
-        r = fseek(f, medicine_number * sizeof(temp_med), SEEK_SET);
-        r = fread(medicine_pointer, sizeof(stored_medicines), number_of_medicines, f);
+        medicine_pointer = (struct medicine *)malloc(sizeof(struct medicine));
+        r = fseek(f, medicine_number * sizeof(struct medicine), SEEK_SET);
+        r = fread(medicine_pointer, sizeof(struct medicine), number_of_medicines, f);
         read_meds_data();
         strcpy(medicine_pointer->name, temp_med.name);
         medicine_pointer->mg = temp_med.mg;
         strcpy(medicine_pointer->dosage, temp_med.dosage);
         strcpy(medicine_pointer->producer, temp_med.producer);
-        r = fseek(f, medicine_number * sizeof(temp_med), SEEK_SET); //
-        r = fwrite(medicine_pointer, sizeof(temp_med), 1, f);        
+        r = fseek(f, medicine_number * sizeof(struct medicine), SEEK_SET); //
+        r = fwrite(medicine_pointer, sizeof(struct medicine), 1, f);        
         //fclose(f);
         free(medicine_pointer);
     }
@@ -232,7 +232,7 @@ int main(int argc, char** argv) {
             break;
         case 'd':
             system("clear");
-            printf("Display list of stored medicines...\n");
+            printf("STORED MEDICINES: \n\n");
             getchar(); //flush
             meds_count = number_of_stored_medicines(filename);
             if (meds_count < 0) {
@@ -242,7 +242,7 @@ int main(int argc, char** argv) {
             }
             break;
         case 'm':
-            system("clear");
+            //system("clear");
             printf("MODIFY MEDICINE\n\n");
             getchar(); //flush
             //printf("Enter the number of a stored medicine that you wish to modify: ");

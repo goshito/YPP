@@ -1,6 +1,5 @@
-#define backupfilename "medicine_database.bak"
 #define MAXSTRLEN 200
-char filename[] = "medicine_database1.bin";
+
 /*
 struct medicine {
     char name[32];
@@ -19,7 +18,7 @@ void add_medicine(char *filename1);
 void display_main_menu(void);
 int number_of_stored_medicines(char *filename);
 int load_stored_medicines(char *filename);
-void display_medicines(char * filename);
+void display_medicines(char *filename);
 void change_medicine(char *filename, int medicine_number);
 void modify_stored_medicine();
 

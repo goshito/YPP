@@ -48,13 +48,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//#include "declarations.h"
 #include "functions.c"
+#include "declarations.h"
 
 //#define filename "medicine_database1.bin" for some reason this doesn't work
-/*#define backupfilename "medicine_database.bak"
-#define MAXSTRLEN 200
-char filename[] = "medicine_database1.bin";*/
+//#define backupfilename "medicine_database.bak"
+//#define MAXSTRLEN 200
+//char filename[] = "medicine_database1.bin";
 /*
 struct medicine {
     char name[32];

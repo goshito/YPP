@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include "declarations.h"
+//#define MAXSTRLEN 200
+
+char filename[] = "ggg";
 
 struct medicine {
     char name[32];
@@ -51,13 +54,15 @@ void read_meds_data() { // what should happend after that? what to do with the t
     while (slen == 0) {
         printf("\nEnter dosage: ");
         //slen = readln(dosage);
-        slen = gets(dosage);
+        scanf("%s", dosage);
+        //slen = gets(dosage);
     }
     
     slen = 0;
     while (slen == 0) {
         printf("\nEnter producer name: ");
-        slen = gets(producer);
+        scanf("%s", producer);
+        //slen = gets(producer);
     }     
     
     strcpy(temp_med.name, medicine_name);

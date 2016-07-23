@@ -36,9 +36,9 @@
  * create modify medicine functionality
  * 
  * TO DO: 21.07.2016:
- * Maybe the variables inside the functions should be global
- * Algorithm to modify medicine
- * I am skipping some input error checking
+ * Maybe the variables inside the functions should be global?
+ * Algorithm to modify medicine - from Huw
+ * I am skipping some input error checking! will dp later
  * transfer functions to a separate file also use a header file to declare them
  */
 
@@ -130,6 +130,7 @@ void display_main_menu(void) {
     printf("a - Add a medicine to the database\n");
     printf("d - Display list of stored medicines\n");
     printf("m - Modify medicine\n");
+    printf("n - Number of stored medicines\n");
     printf("q - End program\n\n");
 }    
 
@@ -223,36 +224,45 @@ int main(int argc, char** argv) {
     while (keep_going) {
         display_main_menu();
         switch(getchar()) {
-        case 'a': // add a medicine in database
-            system("clear");
-            printf("Add a medicine to the database\n");
-            add_medicine(filename);
-            break;
-        case 'd':
-            system("clear");
-            printf("STORED MEDICINES: \n\n");
-            getchar(); //flush
-            meds_count = number_of_stored_medicines(filename);
-            if (meds_count < 0) {
-                printf("Cannot open file: %s\n", filename);
-            } else {
-                display_medicines(filename);
-            }
-            break;
-        case 'm':
-            //system("clear");
-            printf("MODIFY MEDICINE\n\n");
-            getchar(); //flush
-            //printf("Enter the number of a stored medicine that you wish to modify: ");
-            modify_stored_medicine(filename);
-            break;
-        case 'q':
-            printf("Ending...\n");
-            keep_going = 0;
-            break;
-        default:
-            printf("Invalid command.\n");
-            break;
+            case 'a': // add a medicine in database
+                system("clear");
+                printf("Add a medicine to the database\n");
+                add_medicine(filename);
+                break;
+            case 'd':
+                system("clear");
+                printf("STORED MEDICINES: \n\n");
+                getchar(); //flush
+                meds_count = number_of_stored_medicines(filename);
+                if (meds_count < 0) {
+                    printf("Cannot open file: %s\n", filename);
+                } else {
+                    display_medicines(filename);
+                }
+                break;
+            case 'm':
+                //system("clear");
+                printf("MODIFY MEDICINE\n\n");
+                getchar(); //flush
+                //printf("Enter the number of a stored medicine that you wish to modify: ");
+                modify_stored_medicine(filename);
+                break;
+            case 'n':
+                printf("Number of records\n");
+                printf("Database contains %d records\n", number_of_stored_medicines(filename));
+                getchar();
+                break;
+            /*case 's':
+                printf("Save backup\n");
+                save_stored_medicines(backupfilename);
+                break;*/
+            case 'q':
+                printf("Ending...\n");
+                keep_going = 0;
+                break;
+            default:
+                printf("Invalid command.\n");
+                break;
         }
     }
 

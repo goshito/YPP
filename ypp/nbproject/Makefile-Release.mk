@@ -35,7 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/funcs.o \
+	${OBJECTDIR}/functions.o \
 	${OBJECTDIR}/main.o
 
 
@@ -63,10 +63,10 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ypp: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ypp ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/funcs.o: funcs.c 
+${OBJECTDIR}/functions.o: functions.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/funcs.o funcs.c
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/functions.o functions.c
 
 ${OBJECTDIR}/main.o: main.c 
 	${MKDIR} -p ${OBJECTDIR}

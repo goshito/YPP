@@ -1,61 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   main.c
- * Author: georgi
- *
- * Created on June 30, 2016, 11:34 PM
- */
-
-/* TO DO 11.07.2016:
- * forgotten to write what I did
- * 
- * TO DO 12.07.2016:
- * What exactly does readln function and how does it do it? -replaced with gets()
- * When user enters that he/she uses more than one medicine keep asking until 4 medicines are entered
- * temp_med should go into an array - I already have an array(where to put it?
- * 
- * TO DO 14.07.2016:
- * implement add medicine option - done
- * system("clear"); might be good at some points - implemented
- * add display meds database 'd' - 1. determine number of meds in the binary file
- * display number of stored meds problem, spils memory - fixed with getchar();
- * must have a struct array, store the data in a struct array!!!
- * 
- * TO DO 15.07.2016:
- * create a struct array in which the entries to be read - I think I did it create it 
- * 
- * TO DO 16.07.2016:
- * indexing/numeration of stored medicines - done
- * 
- * TO DO 17.07.2016:
- * create modify medicine functionality
- * 
- * TO DO: 21.07.2016:
- * Maybe the variables inside the functions should be global?
- * Algorithm to modify medicine - from Huw
- * I am skipping some input error checking! will dp later
- * transfer functions to a separate file also use a header file to declare them = not done
- * 
- * TO DO 23.07.2016:
- * transfer functions to a separate file also use a header file to declare them
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//#include "declarations.h"
-#include "functions.c"
+#include "declarations.h"
 
-//#define filename "medicine_database1.bin" for some reason this doesn't work
-/*#define backupfilename "medicine_database.bak"
-#define MAXSTRLEN 200
-char filename[] = "medicine_database1.bin";*/
-/*
 struct medicine {
     char name[32];
     int mg;
@@ -66,8 +13,8 @@ struct medicine {
 struct medicine temp_med;
 struct medicine *stored_medicines;
 int medicines_array_len;
-*/
-/*
+
+
 // this gives initial values to begin with
 void init_temp_med() {
     strcpy(temp_med.name, "");
@@ -88,7 +35,8 @@ void read_meds_data() { // what should happend after that? what to do with the t
     while (slen == 0) {
         printf("\nEnter medicine name: ");        
         getchar(); // flush
-        slen = gets(medicine_name); // what does gets() return - This function returns str on success, and NULL on error or when end of file occurs, while no characters have been read.
+        scanf("%s", medicine_name);
+        //slen = gets(medicine_name); // what does gets() return - This function returns str on success, and NULL on error or when end of file occurs, while no characters have been read.
     }
     
     slen = 0;
@@ -224,61 +172,3 @@ void modify_stored_medicine() {
     
     change_medicine(filename, medicine_number);
 }
-*/
-int main(int argc, char** argv) {
-    int meds_count, keep_going = 1;
-    
-    printf("WELCOME TO YPP(Your Pills Program)\n\n");
-    
-    while (keep_going) {
-        display_main_menu();
-        switch(getchar()) {
-            case 'a': // add a medicine in database
-                system("clear");
-                printf("Add a medicine to the database\n");
-                add_medicine(filename);
-                break;
-            case 'd':
-                system("clear");
-                printf("STORED MEDICINES: \n\n");
-                getchar(); //flush
-                meds_count = number_of_stored_medicines(filename);
-                if (meds_count < 0) {
-                    printf("Cannot open file: %s\n", filename);
-                } else {
-                    display_medicines(filename);
-                }
-                break;
-            case 'm':
-                //system("clear");
-                printf("MODIFY MEDICINE\n\n");
-                getchar(); //flush
-                //printf("Enter the number of a stored medicine that you wish to modify: ");
-                modify_stored_medicine(filename);
-                break;
-            case 'n':
-                printf("Number of records\n");
-                printf("Database contains %d records\n", number_of_stored_medicines(filename));
-                getchar();
-                break;
-            /*case 's':
-                printf("Save backup\n");
-                save_stored_medicines(backupfilename);
-                break;*/
-            case 'q':
-                printf("Ending...\n");
-                keep_going = 0;
-                break;
-            default:
-                printf("Invalid command.\n");
-                break;
-        }
-    }
-
-    return (EXIT_SUCCESS);
-}
-
-
-
-
-

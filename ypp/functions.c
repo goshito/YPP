@@ -34,9 +34,9 @@ void read_meds_data() { // what should happend after that? what to do with the t
     
     while (slen == 0) {
         printf("\nEnter medicine name: ");        
-        //getchar(); // flush
-        scanf("%s", &medicine_name);
-        //slen = gets(medicine_name); // what does gets() return - This function returns str on success, and NULL on error or when end of file occurs, while no characters have been read.
+        getchar(); // flush
+        //scanf("%s", &medicine_name);
+        slen = gets(medicine_name); // what does gets() return - This function returns str on success, and NULL on error or when end of file occurs, while no characters have been read.
     }
     
     slen = 0;
@@ -51,15 +51,14 @@ void read_meds_data() { // what should happend after that? what to do with the t
     while (slen == 0) {
         printf("\nEnter dosage: ");
         //slen = readln(dosage);
-        scanf("%s", dosage);
-        //slen = gets(dosage);
+        //scanf("%s", dosage);
+        slen = gets(dosage);
     }
     
     slen = 0;
     while (slen == 0) {
         printf("\nEnter producer name: ");
-        scanf("%s", producer);
-        //slen = gets(producer);
+        slen = gets(producer);
     }     
     
     strcpy(temp_med.name, medicine_name);
@@ -89,6 +88,7 @@ void display_main_menu(void) {
     printf("d - Display list of stored medicines\n");
     printf("m - Modify medicine\n");
     printf("n - Number of stored medicines\n");
+    printf("c - Delete all stored medicines\n");
     printf("q - End program\n\n");
 }    
 
@@ -172,4 +172,11 @@ void modify_stored_medicine(char *filename) {
     scanf("%i", &medicine_number);
     
     change_medicine(filename, medicine_number);
+}
+
+void clear_stored_medicines(char *filename) {
+    FILE *f;
+    
+    f = fopen(filename, "w");
+    printf("\nStored medicines deleted\n");
 }

@@ -100,11 +100,13 @@ int main(int argc, char** argv) {
                 printf("Database contains %d records\n", number_of_stored_medicines(filename));
                 getchar();
                 break;
-            /*case 'c': 
+            case 'c': 
                 printf("Clear medicines database\n");
-                save_stored_medicines(backupfilename);
-                break; */
+                clear_stored_medicines(filename);
+                getchar();
+                break;
             case 'q':
+                getchar();
                 printf("Ending...\n");
                 keep_going = 0;
                 break;

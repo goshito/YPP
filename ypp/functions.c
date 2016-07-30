@@ -1,10 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "declarations.h"
-//#define MAXSTRLEN 200
-
-char filename[] = "ggg";
+#define MAXSTRLEN 200
 
 struct medicine {
     char name[32];
@@ -37,8 +34,8 @@ void read_meds_data() { // what should happend after that? what to do with the t
     
     while (slen == 0) {
         printf("\nEnter medicine name: ");        
-        getchar(); // flush
-        scanf("%s", medicine_name);
+        //getchar(); // flush
+        scanf("%s", &medicine_name);
         //slen = gets(medicine_name); // what does gets() return - This function returns str on success, and NULL on error or when end of file occurs, while no characters have been read.
     }
     
@@ -72,7 +69,7 @@ void read_meds_data() { // what should happend after that? what to do with the t
     
 }
 
-void add_medicine(char *filename1) {
+void add_medicine(char *filename) {
     FILE *f;
     
     read_meds_data();
@@ -82,7 +79,6 @@ void add_medicine(char *filename1) {
     } else {
         fwrite(&temp_med, sizeof(temp_med), 1, f);
         fclose(f);
-        system("clear");
         printf("Medicine added. \nReturning to main menu.\n\n");
     }
 }
@@ -169,7 +165,7 @@ void change_medicine(char *filename, int medicine_number) {
     }
 }
 
-void modify_stored_medicine() {
+void modify_stored_medicine(char *filename) {
     int medicine_number;
     
     printf("Enter number of stored medicine to modify: ");
